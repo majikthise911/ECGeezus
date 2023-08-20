@@ -14,8 +14,8 @@ st.markdown("### Upload ECG Photo")
 st.file_uploader('ECG File upload')
 ######################################################8/1/23############################################################################
 st.markdown("### Analysis (can take up to 2 min to load)")
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 import os
 import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
