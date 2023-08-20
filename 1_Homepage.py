@@ -1,44 +1,30 @@
 import streamlit as st
 from streamlit_option_menu import option_menu # pip install streamlit-option-menu
-
-
 # from dotenv import load_dotenv # comment out for deployment 
 # load_dotenv() # comment out for deployment 
-
-import numpy as np
-import pandas as pd
-import datetime as dt
-import plotly.express as px	# pip install plotly
-import plotly.graph_objs as go
-import matplotlib.pyplot as plt
-import seaborn as sns	# pip install seaborn
-from datetime import datetime, timedelta
-from io import BytesIO # for downloading files
-
-# -------------- PAGE CONFIG --------------
+# ------------ PAGE CONFIG --------------
 page_title = "ECGeezus"
-page_icon = ":zap:"  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
+page_icon = "🩺"  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 
 st.set_page_config(page_title = page_title, layout = layout, page_icon = page_icon)
 st.title(page_title + " " + page_icon)
 
-
+st.markdown("### Upload ECG Photo")
+st.file_uploader('ECG File upload')
 ######################################################8/1/23############################################################################
-st.markdown("## Analysis (can take up to 2 min to load)")
+st.markdown("### Analysis (can take up to 2 min to load)")
 from dotenv import load_dotenv
 load_dotenv()
-
 import os
 import openai
-
 openai.api_key = os.getenv("OPENAI_API_KEY")
-
 # Update imports
 from openai.error import InvalidRequestError
 
+
 # New function to get portfolio analysis  
-def get_portfolio_analysis():
+def get_ecg_analysis():
 
   # Craft prompt with portfolio weights
   prompt = f'''You are a cardiologist writing an analysis report for a patient's electrocardiogram (ECG) results. Please write a detailed analysis report in Markdown formatting that includes the following sections:
@@ -75,15 +61,27 @@ Please write the report in a professional tone using medical terminology where a
     return None
   
   return response.choices[0].message.content
-ecg_analysis = get_portfolio_analysis()
+
+ecg_analysis = ""
+if st.button("Generate Analysis"):
+   
+    ecg_analysis = get_ecg_analysis()
+
+st.markdown("---")
 
 
-with st.expander("Portfolio Analysis"):
-    st.markdown(ecg_analysis)
+if ecg_analysis:
+   st.markdown(ecg_analysis)
+else:
+   st.info("Click button to generate")
+
+
+# with st.expander("Portfolio Analysis"):
+#     st.markdown(ecg_analysis)
 
 ######################################################8/1/23############################################################################
 
 
 st.markdown("""---""")
-st.markdown('Made with :heart: by [Jordan Clayton](https://dca-rsi.streamlit.app/Contact_Me)')
+st.markdown('Made with :heart: by [Jordan Clayton](https://www.linkedin.com/in/jordan-clayton/)')
 st.markdown("""---""")
