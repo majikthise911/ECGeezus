@@ -3,15 +3,15 @@ from streamlit_option_menu import option_menu # pip install streamlit-option-men
 # from dotenv import load_dotenv # comment out for deployment 
 # load_dotenv() # comment out for deployment 
 # ------------ PAGE CONFIG --------------
-page_title = "ECGeezus"
+page_title = "secondOpinion"
 page_icon = "🩺"  # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 layout = "centered"
 
 st.set_page_config(page_title = page_title, layout = layout, page_icon = page_icon)
 st.title(page_title + " " + page_icon)
 
-st.markdown("### Upload ECG Photo")
-st.file_uploader('ECG File upload')
+st.markdown("### Upload EKG Photo")
+st.file_uploader('EKG File upload')
 ######################################################8/1/23############################################################################
 st.markdown("### Analysis (can take up to 2 min to load)")
 # from dotenv import load_dotenv
